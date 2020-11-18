@@ -28,7 +28,7 @@ public class FilmeDAO {
 			stmt.executeUpdate();
 			JOptionPane.showMessageDialog(null, "Filme salvo com sucesso!");
 		} catch(SQLException e) {
-			JOptionPane.showMessageDialog(null, "Erro ao salvar: " + e);
+			JOptionPane.showMessageDialog(null, "Erro ao salvar: " +e);
 		}finally{
 			ConnectionFactory.closeConnection(con, stmt);
 		}
