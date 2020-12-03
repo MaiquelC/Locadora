@@ -19,3 +19,9 @@ create table Cliente (
     senha varchar(200),
     endereco varchar(150)
 );
+
+select * from cliente
+
+use kronostudy;
+
+alter table atividade add Fixa tinyint(1);
