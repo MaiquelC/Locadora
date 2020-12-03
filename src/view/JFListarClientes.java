@@ -37,7 +37,7 @@ public class JFListarClientes extends JFrame {
 	}
 
 	/**
-	 * Create the fram;
+	 * Create the fram;;
 	 */
 	public JFListarClientes() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
