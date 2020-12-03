@@ -2,7 +2,10 @@ package model.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JOptionPane;
 
@@ -29,9 +32,38 @@ public class FilmeDAO {
 			JOptionPane.showMessageDialog(null, "Filme salvo com sucesso!");
 		} catch(SQLException e) {
 			JOptionPane.showMessageDialog(null, "Erro ao salvar: " + e);
-		}finally{
+		} finally{
 			ConnectionFactory.closeConnection(con, stmt);
 		}
+	}
+	
+	public List<Filme> read(){
+		Connection con = ConnectionFactory.getConnection();
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		List<Filme> filmes = new ArrayList<>();
+		
+		try {
+			stmt = con.prepareStatement("select * from filme");
+			rs = stmt.executeQuery();
+			while (rs.next()) {
+				Filme f = new Filme();
+				f.setId_filme(rs.getInt("id_filme"));
+				f.setTitulo(rs.getString("titulo"));
+				f.setDuracao(rs.getInt("duracao"));
+				f.setSinopse(rs.getString("sinopse"));
+				f.setCategoria(rs.getString("categoria"));
+				f.setDublado(rs.getBoolean("dublado"));
+				f.setImagem3d(rs.getBoolean("imagem3d"));
+				filmes.add(f);
+			}
+		} catch (SQLException e) {
+			JOptionPane.showMessageDialog(null, "Erro ao buscar informações do BD: " + e);
+			e.printStackTrace();
+		} finally{
+			ConnectionFactory.closeConnection(con, stmt, rs);
+		}
+		return filmes;
 	}
 
 }
