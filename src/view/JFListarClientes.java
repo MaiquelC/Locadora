@@ -1,6 +1,5 @@
 package view;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -14,9 +13,7 @@ import javax.swing.JButton;
 import javax.swing.table.DefaultTableModel;
 
 import model.bean.Cliente;
-import model.bean.Filme;
 import model.dao.ClienteDAO;
-import model.dao.FilmeDAO;
 
 public class JFListarClientes extends JFrame {
 

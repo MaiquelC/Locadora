@@ -11,7 +11,6 @@ import javax.swing.JOptionPane;
 
 import connection.ConnectionFactory;
 import model.bean.Cliente;
-import model.bean.Filme;
 
 public class ClienteDAO {
 	
