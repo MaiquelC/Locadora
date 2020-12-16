@@ -145,7 +145,7 @@ public class JFAtualizarCliente extends JFrame {
 		btnAlterar.setBounds(220, 175, 168, 27);
 		contentPane.add(btnAlterar);
 		
-		JButton btnCancelar = new JButton("Cancelar");
+		JButton btnCancelar = new JButton("Cancelar ");
 		btnCancelar.setBounds(220, 213, 168, 27);
 		contentPane.add(btnCancelar);
 		
