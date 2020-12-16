@@ -6,7 +6,12 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JButton;
@@ -41,7 +46,7 @@ public class JFListarClientes extends JFrame {
 	 */
 	public JFListarClientes() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 673, 318);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -53,7 +58,7 @@ public class JFListarClientes extends JFrame {
 		contentPane.add(lblListarClientes);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 41, 414, 172);
+		scrollPane.setBounds(10, 41, 637, 193);
 		contentPane.add(scrollPane);
 		
 		jtCliente = new JTable();
@@ -67,15 +72,36 @@ public class JFListarClientes extends JFrame {
 		scrollPane.setViewportView(jtCliente);
 		
 		JButton btnCadastrar = new JButton("Cadastrar Cliente");
-		btnCadastrar.setBounds(10, 227, 147, 23);
+		btnCadastrar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btnCadastrar.setBounds(10, 245, 147, 23);
 		contentPane.add(btnCadastrar);
 		
-		JButton btnAlterarCliente = new JButton("Alterar cliente");
-		btnAlterarCliente.setBounds(167, 227, 127, 23);
-		contentPane.add(btnAlterarCliente);
+		JButton btnNewButton = new JButton("Alterar Cliente");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				//verificar se há linha selecionada
+				if(jtCliente.getSelectedRow()!= -1) {
+					JFAtualizarCliente ac = new JFAtualizarCliente(
+							(int)jtCliente.getValueAt(jtCliente.getSelectedRow(), 0));
+					ac.setVisible(true);
+				}else {
+					JOptionPane.showMessageDialog(null, "Selecione um cliente!");
+				}
+				readJTable();
+			}
+		});
+		btnNewButton.setBounds(167, 245, 122, 23);
+		contentPane.add(btnNewButton);
 		
 		JButton btnExcluirCliente = new JButton("Excluir Cliente");
-		btnExcluirCliente.setBounds(304, 227, 120, 23);
+		btnExcluirCliente.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btnExcluirCliente.setBounds(299, 245, 120, 23);
 		contentPane.add(btnExcluirCliente);
 		
 		readJTable();

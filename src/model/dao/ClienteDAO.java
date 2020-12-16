@@ -11,6 +11,7 @@ import javax.swing.JOptionPane;
 
 import connection.ConnectionFactory;
 import model.bean.Cliente;
+import model.bean.Filme;
 
 public class ClienteDAO {
 	
@@ -63,5 +64,52 @@ public class ClienteDAO {
 		}
 		return clientes;
 	}
+	
+	public Cliente read(int idCliente) {
+		Connection con = ConnectionFactory.getConnection();
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		Cliente c = new Cliente();
+		
+		try {
+			stmt = con.prepareStatement("SELECT * FROM cliente WHERE id_cliente=? LIMIT 1");
+			stmt.setInt(1, idCliente);
+			rs = stmt.executeQuery();
+			if(rs != null && rs.next()) {
+				c.setId_cliente(rs.getInt("id_cliente"));
+				c.setNome(rs.getString("nome"));
+				c.setCpf(rs.getInt("cpf"));
+				c.setUsuario(rs.getString("usuario"));
+				c.setSenha(rs.getString("senha"));
+				c.setEndereco(rs.getString("endereco"));
+			}		
+		} catch (SQLException e) {
+			 e.printStackTrace();
+		} finally {
+			 ConnectionFactory.closeConnection(con, stmt, rs);
+		}
+		return c;
+	}
+	
+	
+	public void update(Cliente c) {
+		Connection con = ConnectionFactory.getConnection();
+		PreparedStatement stmt = null;
 
+		try {
+			stmt = con.prepareStatement("UPDATE cliente SET nome=?, cpf=?, usuario=?, senha=?, endereco=? WHERE id_cliente=?;");
+			stmt.setString(1, c.getNome());
+			stmt.setInt(2, c.getCpf());
+			stmt.setString(3, c.getUsuario());
+			stmt.setString(4, c.getSenha());
+			stmt.setString(5, c.getEndereco());
+			stmt.setInt(6, c.getId_cliente());
+			stmt.executeUpdate();
+			JOptionPane.showMessageDialog(null, "Dados do cliente atualizados com sucesso! ");
+		} catch (SQLException e) {
+			JOptionPane.showMessageDialog(null, "Erro ao atualizar os dados do cliente: " + e);
+		}finally {
+			ConnectionFactory.closeConnection(con, stmt);
+		}
+	}
 }
