@@ -51,7 +51,7 @@ public class JFLogin extends JFrame {
 	 */
 	public JFLogin() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 453, 300);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(255, 255, 255));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -134,16 +134,5 @@ public class JFLogin extends JFrame {
 		btnLimpar.setBackground(new Color(153, 255, 255));
 		btnLimpar.setBounds(230, 202, 181, 23);
 		contentPane.add(btnLimpar);
-		
-		JLabel lblPergunta = new JLabel("Ainda n\u00E3o tem conta?");
-		lblPergunta.setBounds(230, 236, 119, 14);
-		contentPane.add(lblPergunta);
-		lblPergunta.setFont(new Font("Trebuchet MS", Font.PLAIN, 11));
-		
-		JLabel lblAcessarCadastro = new JLabel("Cadastre-se");
-		lblAcessarCadastro.setForeground(new Color(0, 0, 0));
-		lblAcessarCadastro.setFont(new Font("Tahoma", Font.BOLD, 10));
-		lblAcessarCadastro.setBounds(340, 236, 66, 14);
-		contentPane.add(lblAcessarCadastro);
 	}
 }

@@ -116,5 +116,23 @@ public class FilmeDAO {
 			ConnectionFactory.closeConnection(con, stmt);
 		}
 	}
+	
+	public void delete(Filme f) {
+		Connection con = ConnectionFactory.getConnection();
+		PreparedStatement stmt = null;
+		
+		try {
+			stmt = con.prepareStatement("DELETE FROM filme WHERE id_filme=?;");
+			stmt.setInt(1, f.getId_filme());
+			stmt.executeUpdate();
+			JOptionPane.showMessageDialog(null, "Filme excluído com sucesso!");
+			
+		} catch (SQLException e) {
+			JOptionPane.showMessageDialog(null, "Erro ao excluir: "+ e);
+		} finally {
+			ConnectionFactory.closeConnection(con, stmt);
+		}
+		
+	}
 
 }

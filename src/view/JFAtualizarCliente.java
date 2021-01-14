@@ -22,6 +22,8 @@ import model.bean.Cliente;
 import model.bean.Filme;
 import model.dao.ClienteDAO;
 import model.dao.FilmeDAO;
+import java.awt.Color;
+import javax.swing.JSeparator;
 
 public class JFAtualizarCliente extends JFrame {
 
@@ -53,82 +55,102 @@ public class JFAtualizarCliente extends JFrame {
 	 */
 	public JFAtualizarCliente(int id) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 421, 351);
 		contentPane = new JPanel();
+		contentPane.setBackground(new Color(255, 255, 255));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel lblCadastrarCliente = new JLabel("Cadastrar Cliente");
-		lblCadastrarCliente.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblCadastrarCliente.setBounds(10, 11, 124, 27);
-		contentPane.add(lblCadastrarCliente);
-		
 		ClienteDAO cdao = new ClienteDAO();
 		Cliente c = cdao.read(id);
 		
-		JLabel lblNewLabel_7 = new JLabel("ID do cliente");
-		lblNewLabel_7.setBounds(169, 14, 89, 14);
-		contentPane.add(lblNewLabel_7);
-		
-		JLabel lblId = new JLabel("New label");
-		lblId.setBounds(234, 14, 78, 14);
-		contentPane.add(lblId);
-		
 		JLabel lblNome = new JLabel("Nome");
-		lblNome.setBounds(10, 45, 46, 14);
+		lblNome.setFont(new Font("Tahoma", Font.BOLD, 12));
+		lblNome.setBounds(10, 76, 46, 14);
 		contentPane.add(lblNome);
 		
 		txtNome = new JTextField();
-		txtNome.setBounds(10, 67, 168, 20);
+		txtNome.setBounds(10, 101, 168, 20);
 		contentPane.add(txtNome);
 		txtNome.setColumns(10);
 		
 		JLabel lblCpf = new JLabel("CPF");
-		lblCpf.setBounds(10, 98, 46, 14);
+		lblCpf.setFont(new Font("Tahoma", Font.BOLD, 12));
+		lblCpf.setBounds(10, 132, 46, 14);
 		contentPane.add(lblCpf);
 		
 		JSpinner spCpf = new JSpinner();
-		spCpf.setBounds(10, 123, 168, 20);
+		spCpf.setBounds(10, 157, 168, 20);
 		contentPane.add(spCpf);
 		
 		JLabel lblEndereo = new JLabel("Endere\u00E7o");
-		lblEndereo.setBounds(10, 154, 46, 14);
+		lblEndereo.setFont(new Font("Tahoma", Font.BOLD, 12));
+		lblEndereo.setBounds(10, 188, 74, 14);
 		contentPane.add(lblEndereo);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 173, 168, 77);
+		scrollPane.setBounds(10, 213, 168, 77);
 		contentPane.add(scrollPane);
 		
 		JTextArea txtEndereco = new JTextArea();
 		scrollPane.setViewportView(txtEndereco);
+		txtEndereco.setText(c.getEndereco());
 		
 		JLabel lblUsurio = new JLabel("Usu\u00E1rio");
-		lblUsurio.setBounds(220, 45, 46, 14);
+		lblUsurio.setFont(new Font("Tahoma", Font.BOLD, 12));
+		lblUsurio.setBounds(220, 76, 46, 14);
 		contentPane.add(lblUsurio);
 		
+		JPanel panel = new JPanel();
+		panel.setLayout(null);
+		panel.setBackground(new Color(51, 255, 204));
+		panel.setBounds(-2, 0, 407, 47);
+		contentPane.add(panel);
+		
+		JSeparator separator = new JSeparator();
+		separator.setForeground(Color.BLACK);
+		separator.setBackground(Color.BLACK);
+		separator.setBounds(0, 45, 580, 5);
+		panel.add(separator);
+		
+		JLabel lblAtualizarCliente = new JLabel("Atualizar Cliente");
+		lblAtualizarCliente.setFont(new Font("Trebuchet MS", Font.BOLD, 18));
+		lblAtualizarCliente.setBounds(135, 7, 169, 27);
+		panel.add(lblAtualizarCliente);
+		
+		JLabel lblNewLabel_7 = new JLabel("ID do cliente:");
+		lblNewLabel_7.setBounds(10, 16, 89, 14);
+		panel.add(lblNewLabel_7);
+		
+		JLabel lblId = new JLabel("New label");
+		lblId.setBounds(92, 16, 78, 14);
+		panel.add(lblId);
+		
+		lblId.setText(String.valueOf(c.getId_cliente()));
+		
 		txtUser = new JTextField();
-		txtUser.setBounds(220, 67, 168, 20);
+		txtUser.setBounds(220, 101, 168, 20);
 		contentPane.add(txtUser);
 		txtUser.setColumns(10);
 		
 		JLabel lblSenha = new JLabel("Senha");
-		lblSenha.setBounds(220, 98, 46, 14);
+		lblSenha.setFont(new Font("Tahoma", Font.BOLD, 12));
+		lblSenha.setBounds(220, 132, 46, 14);
 		contentPane.add(lblSenha);
 		
 		txtSenha = new JTextField();
-		txtSenha.setBounds(220, 123, 168, 20);
+		txtSenha.setBounds(220, 157, 168, 20);
 		contentPane.add(txtSenha);
 		txtSenha.setColumns(10);
-		
-		lblId.setText(String.valueOf(c.getId_cliente()));
 		txtNome.setText(c.getNome());
 		spCpf.setValue(c.getCpf());
-		txtEndereco.setText(c.getEndereco());
 		txtUser.setText(c.getUsuario());
 		txtSenha.setText(c.getSenha());
 		
 		JButton btnAlterar = new JButton("Alterar");
+		btnAlterar.setBackground(new Color(153, 255, 255));
+		btnAlterar.setFont(new Font("Tahoma", Font.BOLD, 11));
 		btnAlterar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				Cliente c = new Cliente();
@@ -142,12 +164,20 @@ public class JFAtualizarCliente extends JFrame {
 				dao.update(c);
 			}
 		});
-		btnAlterar.setBounds(220, 175, 168, 27);
+		btnAlterar.setBounds(220, 213, 168, 32);
 		contentPane.add(btnAlterar);
 		
 		JButton btnCancelar = new JButton("Cancelar ");
-		btnCancelar.setBounds(220, 213, 168, 27);
+		btnCancelar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btnCancelar.setFont(new Font("Tahoma", Font.BOLD, 11));
+		btnCancelar.setBackground(new Color(153, 255, 255));
+		btnCancelar.setBounds(220, 258, 168, 32);
 		contentPane.add(btnCancelar);
+		
+		
 		
 	}
 
